@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Solicitudes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-4">
+
+    <!-- ✅ MENSAJES DE CONFIRMACIÓN AGREGADOS AQUÍ -->
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>✅ ¡Éxito!</strong> <span th:text="${success}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>❌ Error!</strong> <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Mis Solicitudes</h1>
+        <div>
+            <a th:href="@{/solicitudes/aspirante/vacantes-disponibles}" class="btn btn-success me-2">📝 Nueva Solicitud</a>
+            <a th:href="@{/auth/bienvenida/aspirante}" class="btn btn-outline-secondary">← Volver</a>
+        </div>
+    </div>
+
+    <!-- Información del aspirante -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title" th:text="'Vacantes que has solicitado, ' + ${aspirante.nombre} + ':'"></h4>
+            <p class="card-text mb-0" th:text="'Habilidades: ' + ${aspirante.habilidades}"></p>
+        </div>
+    </div>
+
+    <!-- Lista de solicitudes -->
+    <div class="card">
+        <div class="card-body">
+            <div th:if="${#lists.isEmpty(solicitudes)}" class="alert alert-info text-center">
+                <h5>No has realizado ninguna solicitud</h5>
+                <p>¡Comienza explorando las vacantes disponibles y postulándote!</p>
+                <a th:href="@{/solicitudes/aspirante/vacantes-disponibles}" class="btn btn-primary">Ver Vacantes Disponibles</a>
+            </div>
+
+            <div th:unless="${#lists.isEmpty(solicitudes)}">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>Total de solicitudes: <span th:text="${#lists.size(solicitudes)}" class="badge bg-primary"></span></h5>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Vacante</th>
+                            <th>Empresa</th>
+                            <th>Ubicación</th>
+                            <th>Modalidad</th>
+                            <th>Fecha Solicitud</th>
+                            <th>Estado</th>
+                            <th>Habilidades Usadas</th>
+                            <th>CV Adjunto</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="solicitud : ${solicitudes}">
+                            <td>
+                                <strong th:text="${solicitud.vacante.id}"></strong>
+                            </td>
+                            <td>
+                                <strong th:text="${solicitud.vacante.titulo}"></strong>
+                            </td>
+                            <td th:text="${solicitud.vacante.empleador.empresa}"></td>
+                            <td>
+                                <span class="badge bg-info" th:text="${solicitud.vacante.ubicacionId}"></span>
+                            </td>
+                            <td>
+                                    <span th:switch="${solicitud.vacante.tipoTrabajo}">
+                                        <span th:case="PRESENCIAL" class="badge bg-warning">Presencial</span>
+                                        <span th:case="REMOTO" class="badge bg-success">Remoto</span>
+                                        <span th:case="HIBRIDO" class="badge bg-primary">Híbrido</span>
+                                        <span th:case="TIEMPO_COMPLETO" class="badge bg-primary">Tiempo Completo</span>
+                                        <span th:case="MEDIO_TIEMPO" class="badge bg-info">Medio Tiempo</span>
+                                        <span th:case="FREELANCE" class="badge bg-secondary">Freelance</span>
+                                        <span th:case="CONTRATO" class="badge bg-success">Contrato</span>
+                                        <span th:case="PRACTICAS" class="badge bg-warning">Prácticas</span>
+                                        <span th:case="*" class="badge bg-secondary" th:text="${solicitud.vacante.tipoTrabajo}"></span>
+                                    </span>
+                            </td>
+                            <td>
+                                <small th:text="${#temporals.format(solicitud.fechaSolicitud, 'dd/MM/yyyy HH:mm')}"></small>
+                            </td>
+                            <td>
+                                <span th:switch="${solicitud.estado.name()}">
+                                    <span th:case="PENDIENTE" class="badge bg-warning">Pendiente</span>
+                                    <span th:case="REVISADA" class="badge bg-info">Revisada</span>
+                                    <span th:case="ACEPTADA" class="badge bg-success">Aceptada</span>
+                                    <span th:case="RECHAZADA" class="badge bg-danger">Rechazada</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="text-muted" th:text="${aspirante.habilidades}"></span>
+                            </td>
+                            <td>
+                                <small class="text-muted" th:text="${solicitud.cvAdjunto}"></small>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Resumen simple sin contadores problemáticos -->
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h6>Total de solicitudes: <span th:text="${#lists.size(solicitudes)}" class="badge bg-primary"></span></h6>
+                    <small class="text-muted">Puedes ver el estado de cada solicitud en la tabla superior.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <div class="mt-3 text-center">
+        <a th:href="@{/auth/bienvenida/aspirante}" class="btn btn-outline-secondary me-2">← Volver al Inicio</a>
+        <a th:href="@{/auth/logout}" class="btn btn-outline-danger">Cerrar Sesión</a>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

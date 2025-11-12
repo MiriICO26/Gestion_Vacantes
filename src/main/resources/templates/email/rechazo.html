@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualización de tu solicitud</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            border-radius: 10px 10px 0 0;
+            padding: 2rem 1rem;
+        }
+        .content-section {
+            background: #ffffff;
+            padding: 2rem;
+        }
+        .footer-section {
+            background: #f8f9fa;
+            border-radius: 0 0 10px 10px;
+            border-top: 1px solid #dee2e6;
+            padding: 1.5rem;
+        }
+        .vacante-info {
+            background: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            border-radius: 8px;
+        }
+        .btn-outline-primary {
+            border: 2px solid #007bff;
+            color: #007bff;
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: all 0.2s;
+        }
+        .btn-outline-primary:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<div class="container email-container">
+    <!-- Header -->
+    <div class="header-section text-center text-white">
+        <h1 class="mb-2 display-5 fw-bold">Actualización de tu Solicitud</h1>
+        <p class="mb-0 fs-5">Agradecemos tu interés</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content-section">
+        <p class="lead">Hola <strong th:text="${nombreAspirante}">Nombre</strong>,</p>
+
+        <p>Agradecemos mucho tu interés en la posición de <strong th:text="${nombreVacante}">Vacante</strong> en <strong th:text="${nombreEmpresa}">Empresa</strong>.</p>
+
+        <div class="vacante-info p-4 mb-4">
+            <h3 class="h4 text-dark fw-bold mb-2" th:text="${nombreVacante}">Nombre Vacante</h3>
+            <p class="mb-0 text-muted fs-5" th:text="'🏢 ' + ${nombreEmpresa}">Empresa</p>
+        </div>
+
+        <p>Después de revisar cuidadosamente todas las solicitudes recibidas, lamentamos informarte que no hemos seleccionado tu perfil para esta vacante en particular.</p>
+
+        <p>Esta decisión no disminuye en absoluto el valor de tu experiencia y habilidades. Te animamos a que sigas aplicando a otras oportunidades que se ajusten mejor a tu perfil.</p>
+
+        <p class="fw-bold fs-5 mt-4">🚀 ¿Qué sigue?</p>
+        <ul class="list-unstyled">
+            <li class="mb-2">🔍 <strong>Puedes revisar otras vacantes disponibles</strong> en nuestra plataforma</li>
+            <li class="mb-2">💼 <strong>Tu perfil permanecerá en nuestra base de datos</strong> para futuras oportunidades</li>
+            <li class="mb-2">📈 <strong>Sigue desarrollando tus habilidades</strong> - ¡tu próxima oportunidad está por llegar!</li>
+            <li>🌟 <strong>No te desanimes</strong> - cada proceso es una oportunidad de aprendizaje</li>
+        </ul>
+
+        <div class="alert alert-info mt-4">
+            <strong>💡 Consejo profesional:</strong> Te recomendamos personalizar tu CV y carta de presentación para cada vacante a la que apliques.
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section text-center">
+        <p class="text-muted mb-1 small" th:text="'Equipo de Reclutamiento - ' + ${nombreEmpresa}"></p>
+        <p class="text-muted mb-0 small">Gracias por confiar en nosotros para tu desarrollo profesional</p>
+    </div>
+</div>
+</body>
+</html>

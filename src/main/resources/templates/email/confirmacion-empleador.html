@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Entrevista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-radius: 10px 10px 0 0;
+        }
+        .content-section {
+            background: #ffffff;
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+        }
+        .footer-section {
+            background: #f8f9fa;
+            border-radius: 0 0 10px 10px;
+            border: 1px solid #dee2e6;
+        }
+        .info-box {
+            background: #e8f5e8;
+            border-left: 4px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+<div class="container email-container">
+    <!-- Header -->
+    <div class="header-section text-center text-white py-4">
+        <h1 class="mb-2">✅ Confirmación Recibida</h1>
+        <p class="mb-0">Un aspirante ha confirmado la entrevista</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content-section p-4">
+        <p>Hola <strong th:text="${nombreEmpleador}">Nombre</strong>,</p>
+
+        <p>Tenemos buenas noticias. El aspirante ha confirmado su disponibilidad para la entrevista:</p>
+
+        <div class="info-box p-3 rounded mb-4">
+            <h3 class="h5 text-success mb-3" th:text="${nombreVacante}">Nombre Vacante</h3>
+
+            <p class="mb-2"><strong>👤 Aspirante:</strong> <span th:text="${nombreAspirante}">Nombre</span></p>
+            <p class="mb-2"><strong>📧 Correo:</strong> <span th:text="${correoAspirante}">correo@ejemplo.com</span></p>
+            <p class="mb-0" th:if="${telefonoAspirante} != null">
+                <strong>📞 Teléfono:</strong> <span th:text="${telefonoAspirante}">Teléfono</span>
+            </p>
+        </div>
+
+        <p><strong>Próximos pasos recomendados:</strong></p>
+        <ul class="list-unstyled">
+            <li>✅ Contactar al aspirante para coordinar detalles finales</li>
+            <li>✅ Preparar la sala de entrevista (virtual o presencial)</li>
+            <li>✅ Revisar el CV y perfil del aspirante</li>
+            <li>✅ Definir las preguntas clave para la entrevista</li>
+        </ul>
+
+        <div class="alert alert-info mt-4">
+            <strong>💡 Tip:</strong> Recuerda que la primera impresión es importante.
+            Sé puntual y prepara un ambiente profesional para la entrevista.
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section bg-light text-center py-3">
+        <p class="text-muted mb-1">Sistema Automático de Notificaciones</p>
+        <p class="text-muted mb-0">Gestión de Vacantes - Este es un mensaje automático</p>
+    </div>
+</div>
+</body>
+</html>

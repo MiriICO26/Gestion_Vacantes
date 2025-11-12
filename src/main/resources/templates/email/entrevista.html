@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Entrevista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border-radius: 10px 10px 0 0;
+            padding: 2rem 1rem;
+        }
+        .content-section {
+            background: #ffffff;
+            padding: 2rem;
+        }
+        .footer-section {
+            background: #f8f9fa;
+            border-radius: 0 0 10px 10px;
+            border-top: 1px solid #dee2e6;
+            padding: 1.5rem;
+        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            border-radius: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        }
+        .interview-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container email-container">
+    <!-- Header -->
+    <div class="header-section text-center text-white">
+        <div class="interview-icon">🎯</div>
+        <h1 class="mb-2 display-5 fw-bold">Confirmación de Entrevista</h1>
+        <p class="mb-0 fs-5">¡Estamos emocionados de conocerte!</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content-section">
+        <p class="lead">Hola <strong th:text="${nombreAspirante}">Nombre</strong>,</p>
+
+        <p class="fs-6">¡Excelentes noticias! Has sido seleccionado para una entrevista para la posición de:</p>
+
+        <h3 class="text-primary text-center my-4 fw-bold" th:text="${nombreVacante}">Nombre Vacante</h3>
+
+        <div class="info-box p-4 mb-4">
+            <p class="mb-3 fs-6"><strong>📅 Fecha y Hora:</strong><br>
+                <span class="text-dark fs-5" th:text="${fechaEntrevista}">Fecha</span>
+            </p>
+            <p class="mb-3 fs-6"><strong>⏰ Duración estimada:</strong><br>
+                <span class="text-dark fs-5" th:text="${duracion}">30-45 minutos</span>
+            </p>
+            <p class="mb-0 fs-6"><strong>🔗 Enlace de la reunión:</strong><br>
+                <a th:href="${enlaceReunion}" class="text-primary fs-5 fw-bold" th:text="${enlaceReunion}">Enlace</a>
+            </p>
+        </div>
+
+        <p class="fw-bold fs-5 mt-4">🎯 Preparación para la entrevista:</p>
+        <ul class="list-unstyled">
+            <li class="mb-2">⏰ <strong>Conecta 5-10 minutos antes</strong> para verificar tu audio y video</li>
+            <li class="mb-2">📝 <strong>Prepara preguntas inteligentes</strong> sobre la posición y la empresa</li>
+            <li class="mb-2">🆔 <strong>Ten a la mano tu identificación oficial</strong> (INE, pasaporte)</li>
+            <li class="mb-2">💻 <strong>Asegúrate de tener buena conexión a internet</strong> y carga en tu dispositivo</li>
+            <li class="mb-2">🎧 <strong>Usa audífonos</strong> para mejor calidad de audio</li>
+            <li>📄 <strong>Revisa tu CV</strong> y prepárate para hablar de tu experiencia</li>
+        </ul>
+
+        <div class="alert alert-info mt-4">
+            <strong>💡 Tip profesional:</strong> Investiga sobre nuestra empresa y prepárate para explicar por qué eres el candidato ideal para esta posición.
+        </div>
+
+        <div class="text-center mt-5">
+            <a th:href="${enlaceReunion}" class="btn btn-primary btn-lg px-5 py-3">
+                🎥 Unirse a la Entrevista
+            </a>
+            <p class="text-muted mt-2 small">Este enlace estará activo 15 minutos antes de la hora programada</p>
+        </div>
+
+        <p class="text-center mt-4 fs-6">
+            <small class="text-muted">
+                Si tienes algún problema técnico con el enlace o necesitas reprogramar,<br>
+                por favor contáctanos inmediatamente respondiendo a este correo.
+            </small>
+        </p>
+
+        <p class="text-center mt-3 fs-5 fw-bold text-primary">¡Esperamos conocerte pronto! 🚀</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section text-center">
+        <p class="text-muted mb-1 small">Equipo de Reclutamiento</p>
+        <p class="text-muted mb-0 small">Te deseamos mucho éxito en tu entrevista</p>
+    </div>
+</div>
+</body>
+</html>
